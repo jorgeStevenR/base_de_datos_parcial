@@ -1,0 +1,76 @@
+package com.uniminuto.auth.domain.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "clientes")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // =========================
+    // DOCUMENTO
+    // =========================
+
+    @Column(name = "document_number", nullable = false, unique = true)
+    private String documentNumber;
+
+    // =========================
+    // NOMBRES
+    // =========================
+
+    @Column(name = "nombres", nullable = false)
+    private String firstName;
+
+    // =========================
+    // APELLIDOS
+    // =========================
+
+    @Column(name = "apellidos", nullable = false)
+    private String lastName;
+
+    // =========================
+    // CORREO
+    // =========================
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    // =========================
+    // TELÉFONO
+    // =========================
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    // =========================
+    // DIRECCIÓN
+    // =========================
+
+    @Column(name = "address", nullable = false)
+    private String address;
+
+    // =========================
+    // PDF RUT
+    // =========================
+
+    @Column(name = "rut_pdf_path")
+    private String rutPdfPath;
+
+    // =========================
+    // FECHA CREACIÓN
+    // =========================
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+}
