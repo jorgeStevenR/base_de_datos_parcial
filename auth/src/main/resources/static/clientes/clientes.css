@@ -1,0 +1,8 @@
+/* =========================================
+   CLIENTES - Estilos específicos
+   ========================================= */
+@import url('../shared/sidebar.css');
+@import url('../shared/tablas.css');
+@import url('../shared/formularios.css');
+@import url('../shared/modal.css');
+@import url('../shared/alertas.css');

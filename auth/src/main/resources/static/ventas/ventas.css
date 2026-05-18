@@ -1,0 +1,34 @@
+@import url('../shared/sidebar.css');
+@import url('../shared/tablas.css');
+@import url('../shared/formularios.css');
+@import url('../shared/modal.css');
+@import url('../shared/alertas.css');
+@import url('../shared/botones.css');
+
+.detalle-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.detalle-item select { flex: 2; }
+.detalle-item input { flex: 1; }
+.total-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2563eb;
+    text-align: right;
+    margin-top: 12px;
+}
+.client-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}

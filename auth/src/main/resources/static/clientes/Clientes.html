@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - Sistema de Gestión</title>
+    <link rel="stylesheet" href="clientes.css">
+    <link rel="stylesheet" href="../shared/botones.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📊 Gestión</h2>
+                <small>Sistema de Ventas</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard/Dashboard.html"><span class="icon">📈</span> <span>Dashboard</span></a>
+                <a href="/clientes/Clientes.html" class="active"><span class="icon">👥</span> <span>Clientes</span></a>
+                <a href="/productos/Productos.html"><span class="icon">📦</span> <span>Inventario</span></a>
+                <a href="/ventas/Ventas.html"><span class="icon">🛒</span> <span>Ventas</span></a>
+                <a href="/caja/Caja.html"><span class="icon">💰</span> <span>Caja</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">Cargando...</div>
+                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>👥 Clientes</h1>
+                <button class="btn btn-primary" onclick="abrirModalCrear()">+ Nuevo Cliente</button>
+            </div>
+
+            <div id="alertBox" class="alert"></div>
+
+            <!-- BUSCADOR -->
+            <div class="card" style="background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);padding:16px;margin-bottom:16px;">
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <input type="text" class="form-control" id="searchCedula" placeholder="Buscar por número de cédula..." style="max-width:300px;">
+                    <button class="btn btn-primary btn-sm" id="btnBuscarCliente">🔍 Buscar</button>
+                    <button class="btn btn-secondary btn-sm" onclick="cargarClientes()">Limpiar</button>
+                </div>
+            </div>
+
+            <!-- TABLA -->
+            <div class="card" style="background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);padding:20px;">
+                <h3 style="margin-bottom:12px;">Listado de Clientes</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cédula</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientesBody">
+                            <tr><td colspan="6" style="text-align:center;color:#64748b;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL CREAR CLIENTE -->
+    <div class="modal-overlay" id="modalCrear">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Registrar Cliente</h2>
+                <button class="modal-close" onclick="cerrarModalCrear()">&times;</button>
+            </div>
+            <form id="formCrearCliente">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Número de Cédula *</label>
+                        <input type="text" class="form-control" id="docNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono *</label>
+                        <input type="text" class="form-control" id="cliPhone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombres *</label>
+                        <input type="text" class="form-control" id="cliFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos *</label>
+                        <input type="text" class="form-control" id="cliLastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico *</label>
+                    <input type="email" class="form-control" id="cliEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Dirección *</label>
+                    <input type="text" class="form-control" id="cliAddress" required>
+                </div>
+                <div class="form-group">
+                    <label>Archivo RUT (PDF)</label>
+                    <input type="file" class="form-control" id="cliRut" accept=".pdf">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalCrear()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardarCliente">Guardar Cliente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="clientes.js"></script>
+</body>
+</html>

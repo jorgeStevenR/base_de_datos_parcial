@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -29,5 +30,17 @@ public class ClienteController {
         Cliente clienteCreado = clienteService.crearCliente(request, archivo);
 
         return ResponseEntity.ok(clienteCreado);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Cliente>> listarClientes() {
+        return ResponseEntity.ok(clienteService.listarClientes());
+    }
+
+    @GetMapping("/buscar/{documentNumber}")
+    public ResponseEntity<Cliente> buscarPorCedula(
+            @PathVariable String documentNumber
+    ) {
+        return ResponseEntity.ok(clienteService.buscarPorCedula(documentNumber));
     }
 }

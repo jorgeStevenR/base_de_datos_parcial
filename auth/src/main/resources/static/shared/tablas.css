@@ -1,0 +1,23 @@
+/* =========================================
+   TABLAS COMPARTIDO
+   ========================================= */
+.table-container { overflow-x: auto; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+}
+table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+table tbody tr:hover { background: #f8fafc; }

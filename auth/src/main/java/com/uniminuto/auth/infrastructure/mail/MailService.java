@@ -18,7 +18,7 @@ public class MailService implements MailPort {
     @Value("${app.mail.from}")
     private String fromAddress;
 
-    public void sendResetPasswordEmail(String to, String resetToken, int expirationMinutes) {
+    public void sendResetPasswordEmail(String to, String resetLink, int expirationMinutes) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromAddress);
         message.setTo(to);
@@ -28,15 +28,17 @@ public class MailService implements MailPort {
 
                 Has solicitado recuperar tu contraseña.
 
-                Tu código de recuperación es: %s
+                Haz clic en el siguiente enlace para restablecerla:
 
-                Este código expira en %d minutos.
+                %s
+
+                Este enlace expira en %d minutos.
 
                 Si no solicitaste este cambio, ignora este correo.
 
                 Saludos,
                 El equipo de Auth
-                """.formatted(resetToken, expirationMinutes));
+                """.formatted(resetLink, expirationMinutes));
 
         mailSender.send(message);
         log.info("Correo de recuperación enviado a: {}", to);

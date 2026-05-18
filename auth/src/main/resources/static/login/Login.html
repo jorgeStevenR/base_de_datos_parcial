@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Sistema de Gestión</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-card">
+        <h1>Sistema de Gestión</h1>
+        <p class="subtitle">Inicia sesión para continuar</p>
+        <div id="alertBox" class="alert"></div>
+
+        <!-- LOGIN -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="correo@ejemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <div class="password-wrapper">
+                    <input type="password" class="form-control" id="loginPassword" placeholder="••••••••" required>
+                    <button type="button" class="toggle-password" onclick="togglePass('loginPassword', this)"><img src="/icons/1.png" alt="ver"></button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="loginBtn">Iniciar Sesión</button>
+            <div class="form-footer">
+                <a onclick="showPanel('register')">Registrarse</a> |
+                <a onclick="showPanel('forgot')">Recuperar contraseña</a>
+            </div>
+        </form>
+
+        <!-- REGISTER -->
+        <form id="registerForm" style="display:none;">
+            <h3 style="margin-bottom:16px;">Crear cuenta</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombres</label>
+                    <input type="text" class="form-control" id="regFirstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellidos</label>
+                    <input type="text" class="form-control" id="regLastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" class="form-control" id="regEmail" required>
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <div class="password-wrapper">
+                    <input type="password" class="form-control" id="regPassword" required minlength="6">
+                    <button type="button" class="toggle-password" onclick="togglePass('regPassword', this)"><img src="/icons/1.png" alt="ver"></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Confirmar Contraseña</label>
+                <div class="password-wrapper">
+                    <input type="password" class="form-control" id="regConfirmPassword" placeholder="Repite la contraseña" required minlength="6">
+                    <button type="button" class="toggle-password" onclick="togglePass('regConfirmPassword', this)"><img src="/icons/1.png" alt="ver"></button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="registerBtn">Registrarse</button>
+            <div class="form-footer"><a onclick="showPanel('login')">¿Ya tienes cuenta? Inicia sesión</a></div>
+        </form>
+
+        <!-- FORGOT -->
+        <form id="forgotForm" style="display:none;">
+            <h3 style="margin-bottom:16px;">Recuperar contraseña</h3>
+            <p style="font-size:0.85rem;color:#94a3b8;margin-bottom:16px;">Ingresa tu correo y te enviaremos un enlace de recuperación.</p>
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" class="form-control" id="forgotEmail" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="forgotBtn">Enviar código</button>
+            <div class="form-footer"><a onclick="showPanel('login')">Volver</a></div>
+        </form>
+
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

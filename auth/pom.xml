@@ -94,6 +94,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Apache PDFBox (generación de facturas PDF) -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

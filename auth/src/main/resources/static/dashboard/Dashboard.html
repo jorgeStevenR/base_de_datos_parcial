@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gestión</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📊 Gestión</h2>
+                <small>Sistema de Ventas</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard/Dashboard.html" class="active"><span class="icon">📈</span> <span>Dashboard</span></a>
+                <a href="/clientes/Clientes.html"><span class="icon">👥</span> <span>Clientes</span></a>
+                <a href="/productos/Productos.html"><span class="icon">📦</span> <span>Inventario</span></a>
+                <a href="/ventas/Ventas.html"><span class="icon">🛒</span> <span>Ventas</span></a>
+                <a href="/caja/Caja.html"><span class="icon">💰</span> <span>Caja</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">Cargando...</div>
+                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>📈 Dashboard</h1>
+                <span id="fechaActual" style="color:#64748b;font-size:0.9rem;"></span>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statClientes">0</div>
+                    <div class="stat-label">Clientes Registrados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statProductos">0</div>
+                    <div class="stat-label">Productos en Stock</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statVentas">0</div>
+                    <div class="stat-label">Ventas Realizadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statCaja" style="color:#16a34a;">$0</div>
+                    <div class="stat-label">Saldo en Caja</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>📋 Últimas Ventas</h3>
+                    <a href="/ventas/Ventas.html" class="btn btn-sm" style="background:#2563eb;color:#fff;padding:6px 12px;border-radius:6px;font-size:0.8rem;">Ver todas</a>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>#</th><th>Cliente</th><th>Documento</th><th>Total</th><th>Fecha</th></tr>
+                        </thead>
+                        <tbody id="ultimasVentasBody">
+                            <tr><td colspan="5" style="text-align:center;color:#64748b;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

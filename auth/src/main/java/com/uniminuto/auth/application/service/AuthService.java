@@ -96,10 +96,12 @@ public class AuthService {
                 .verificationCodeExpiration(LocalDateTime.now().plusMinutes(verificationTokenExpirationMinutes))
                 .build();
 
-        userRepository.save(user);
+        String verificationLink = frontendUrl + "/verify/VerifyEmail.html?token=" + verificationToken;
 
-        String verificationLink = frontendUrl + "/verify-email?token=" + verificationToken;
+        // Enviar correo PRIMERO, si falla el @Transactional revierte el INSERT
         mailPort.sendVerificationEmail(user.getEmail(), verificationLink, verificationTokenExpirationMinutes);
+
+        userRepository.save(user);
 
         log.info("Usuario registrado, verificación pendiente: {}", user.getEmail());
 
@@ -133,14 +135,15 @@ public class AuthService {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            String resetToken = UUID.randomUUID().toString().replace("-", "").substring(0, 6).toUpperCase();
+            String rawToken = UUID.randomUUID().toString();
 
-            user.setResetToken(passwordEncoder.encode(resetToken));
+            user.setResetToken(passwordEncoder.encode(rawToken));
             user.setResetTokenExpiration(LocalDateTime.now().plusMinutes(resetTokenExpirationMinutes));
             userRepository.save(user);
 
-            mailPort.sendResetPasswordEmail(user.getEmail(), resetToken, resetTokenExpirationMinutes);
-            log.info("Token de recuperación enviado a: {}", user.getEmail());
+            String resetLink = frontendUrl + "/reset/ResetPassword.html?token=" + rawToken + "&email=" + user.getEmail();
+            mailPort.sendResetPasswordEmail(user.getEmail(), resetLink, resetTokenExpirationMinutes);
+            log.info("Enlace de recuperación enviado a: {}", user.getEmail());
         }
 
         // Siempre retorna éxito para evitar user enumeration attack

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario - Sistema de Gestión</title>
+    <link rel="stylesheet" href="productos.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📊 Gestión</h2>
+                <small>Sistema de Ventas</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard/Dashboard.html"><span class="icon">📈</span> <span>Dashboard</span></a>
+                <a href="/clientes/Clientes.html"><span class="icon">👥</span> <span>Clientes</span></a>
+                <a href="/productos/Productos.html" class="active"><span class="icon">📦</span> <span>Inventario</span></a>
+                <a href="/ventas/Ventas.html"><span class="icon">🛒</span> <span>Ventas</span></a>
+                <a href="/caja/Caja.html"><span class="icon">💰</span> <span>Caja</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">Cargando...</div>
+                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>📦 Inventario</h1>
+                <button class="btn btn-primary" onclick="abrirModalCrear()">+ Nuevo Producto</button>
+            </div>
+
+            <div id="alertBox" class="alert"></div>
+
+            <div class="card" style="background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);padding:16px;margin-bottom:16px;">
+                <input type="text" class="form-control" id="searchProducto" placeholder="🔍 Buscar producto por nombre..." style="max-width:400px;">
+            </div>
+
+            <div class="card" style="background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);padding:20px;">
+                <h3 style="margin-bottom:12px;">Listado de Productos</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productosBody">
+                            <tr><td colspan="6" style="text-align:center;color:#64748b;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL PRODUCTO -->
+    <div class="modal-overlay" id="modalProducto">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalProductoTitle">Nuevo Producto</h2>
+                <button class="modal-close" onclick="cerrarModalProducto()">&times;</button>
+            </div>
+            <form id="formProducto">
+                <div class="form-group">
+                    <label>Nombre del Producto *</label>
+                    <input type="text" class="form-control" id="prodNombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea class="form-control" id="prodDesc" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Precio *</label>
+                        <input type="number" class="form-control" id="prodPrecio" step="0.01" min="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock *</label>
+                        <input type="number" class="form-control" id="prodStock" min="0" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalProducto()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardarProducto">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="productos.js"></script>
+</body>
+</html>

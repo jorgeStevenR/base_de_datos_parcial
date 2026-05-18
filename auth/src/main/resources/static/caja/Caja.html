@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja - Sistema de Gestión</title>
+    <link rel="stylesheet" href="caja.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📊 Gestión</h2>
+                <small>Sistema de Ventas</small>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard/Dashboard.html"><span class="icon">📈</span> <span>Dashboard</span></a>
+                <a href="/clientes/Clientes.html"><span class="icon">👥</span> <span>Clientes</span></a>
+                <a href="/productos/Productos.html"><span class="icon">📦</span> <span>Inventario</span></a>
+                <a href="/ventas/Ventas.html"><span class="icon">🛒</span> <span>Ventas</span></a>
+                <a href="/caja/Caja.html" class="active"><span class="icon">💰</span> <span>Caja</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="userInfo">Cargando...</div>
+                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>💰 Caja</h1>
+                <button class="btn btn-primary" id="btnDescargarHistorico">📥 Descargar Histórico PDF</button>
+            </div>
+
+            <div id="alertBox" class="alert"></div>
+
+            <!-- SALDO -->
+            <div class="saldo-card">
+                <div class="saldo-label">Saldo Total en Caja</div>
+                <div class="saldo-monto" id="saldoTotal">$0.00</div>
+                <div class="saldo-ventas" id="totalVentasCount">0 ventas realizadas</div>
+            </div>
+
+            <!-- HISTORIAL -->
+            <div class="card" style="background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1);padding:20px;">
+                <h3 style="margin-bottom:12px;">📋 Historial de Ventas</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cliente</th>
+                                <th>Documento</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cajaHistorialBody">
+                            <tr><td colspan="5" style="text-align:center;color:#64748b;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../shared/api.js"></script>
+    <script src="caja.js"></script>
+</body>
+</html>
