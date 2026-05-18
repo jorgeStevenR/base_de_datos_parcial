@@ -1,4 +1,4 @@
-package com.uniminuto.auth.domain.repository;
+package com.uniminuto.auth.infrastructure.persistence;
 
 import com.uniminuto.auth.domain.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;

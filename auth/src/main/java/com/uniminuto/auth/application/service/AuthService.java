@@ -7,7 +7,7 @@ import com.uniminuto.auth.domain.exception.ConflictException;
 import com.uniminuto.auth.domain.exception.ResourceNotFoundException;
 import com.uniminuto.auth.domain.exception.UnauthorizedException;
 import com.uniminuto.auth.domain.model.User;
-import com.uniminuto.auth.domain.repository.UserRepository;
+import com.uniminuto.auth.infrastructure.persistence.UserRepository;
 import com.uniminuto.auth.application.dto.request.ForgotPasswordRequest;
 import com.uniminuto.auth.application.dto.request.LoginRequest;
 import com.uniminuto.auth.application.dto.request.RegisterRequest;

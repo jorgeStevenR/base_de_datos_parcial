@@ -1,4 +1,4 @@
-package com.uniminuto.auth.infrastructure.security;
+package com.uniminuto.auth.application.security;
 
 import com.uniminuto.auth.domain.port.out.JwtPort;
 import io.jsonwebtoken.*;

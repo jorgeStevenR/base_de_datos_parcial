@@ -4,7 +4,7 @@ import com.uniminuto.auth.application.dto.request.ClienteRequest;
 import com.uniminuto.auth.domain.exception.ConflictException;
 import com.uniminuto.auth.domain.exception.ResourceNotFoundException;
 import com.uniminuto.auth.domain.model.Cliente;
-import com.uniminuto.auth.domain.repository.ClienteRepository;
+import com.uniminuto.auth.infrastructure.persistence.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

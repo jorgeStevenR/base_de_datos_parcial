@@ -1,4 +1,4 @@
-package com.uniminuto.auth.infrastructure.security;
+package com.uniminuto.auth.application.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package com.uniminuto.auth.infrastructure.mail;
+package com.uniminuto.auth.application.service;
 
 import com.uniminuto.auth.domain.port.out.MailPort;
 import lombok.RequiredArgsConstructor;

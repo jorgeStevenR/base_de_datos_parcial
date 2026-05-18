@@ -3,7 +3,7 @@ package com.uniminuto.auth.application.service;
 import com.uniminuto.auth.application.dto.response.CajaResponse;
 import com.uniminuto.auth.application.dto.response.VentaResponse;
 import com.uniminuto.auth.domain.model.Venta;
-import com.uniminuto.auth.domain.repository.VentaRepository;
+import com.uniminuto.auth.infrastructure.persistence.VentaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;

@@ -1,4 +1,4 @@
-package com.uniminuto.auth.infrastructure.security;
+package com.uniminuto.auth.application.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

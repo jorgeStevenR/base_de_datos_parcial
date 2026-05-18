@@ -4,7 +4,7 @@ import com.uniminuto.auth.application.dto.request.ProductoRequest;
 import com.uniminuto.auth.application.dto.response.ProductoResponse;
 import com.uniminuto.auth.domain.exception.ResourceNotFoundException;
 import com.uniminuto.auth.domain.model.Producto;
-import com.uniminuto.auth.domain.repository.ProductoRepository;
+import com.uniminuto.auth.infrastructure.persistence.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
-package com.uniminuto.auth.infrastructure.security;
+package com.uniminuto.auth.application.security;
 
 import com.uniminuto.auth.domain.model.User;
-import com.uniminuto.auth.domain.repository.UserRepository;
+import com.uniminuto.auth.infrastructure.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

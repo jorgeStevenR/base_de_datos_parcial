@@ -1,4 +1,4 @@
-package com.uniminuto.auth.infrastructure.exception;
+package com.uniminuto.auth.application.exception;
 
 import com.uniminuto.auth.application.dto.response.MessageResponse;
 import com.uniminuto.auth.domain.exception.BadRequestException;
