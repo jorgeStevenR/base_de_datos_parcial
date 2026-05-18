@@ -21,56 +21,48 @@ public class Cliente {
     // =========================
     // DOCUMENTO
     // =========================
-
     @Column(name = "document_number", nullable = false, unique = true)
     private String documentNumber;
 
     // =========================
     // NOMBRES
     // =========================
-
-    @Column(name = "nombres", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
     // =========================
     // APELLIDOS
     // =========================
-
-    @Column(name = "apellidos", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     // =========================
     // CORREO
     // =========================
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     // =========================
     // TELÉFONO
     // =========================
-
     @Column(name = "phone", nullable = false)
     private String phone;
 
     // =========================
     // DIRECCIÓN
     // =========================
-
     @Column(name = "address", nullable = false)
     private String address;
 
     // =========================
     // PDF RUT
     // =========================
-
     @Column(name = "rut_pdf_path")
     private String rutPdfPath;
 
     // =========================
     // FECHA CREACIÓN
     // =========================
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

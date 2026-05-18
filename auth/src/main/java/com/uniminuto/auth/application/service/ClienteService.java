@@ -1,6 +1,8 @@
 package com.uniminuto.auth.application.service;
 
 import com.uniminuto.auth.application.dto.request.ClienteRequest;
+import com.uniminuto.auth.domain.exception.ConflictException;
+import com.uniminuto.auth.domain.exception.ResourceNotFoundException;
 import com.uniminuto.auth.domain.model.Cliente;
 import com.uniminuto.auth.domain.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,44 +21,43 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
 
+    private final String uploadDir = "uploads/ruts";
+
+    // =========================
+    // CREAR CLIENTE
+    // =========================
     @Transactional
     public Cliente crearCliente(ClienteRequest request, MultipartFile archivo) throws IOException {
 
         // VALIDAR CÉDULA
         if (clienteRepository.existsByDocumentNumber(request.getDocumentNumber())) {
-            throw new RuntimeException("La cédula ya está registrada");
+            throw new ConflictException("La cédula ya está registrada");
         }
 
         // VALIDAR EMAIL
         if (clienteRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("El correo ya está registrado");
+            throw new ConflictException("El correo ya está registrado");
         }
 
-        // CREAR CARPETA uploads/ruts SI NO EXISTE
-        String uploadDir = System.getProperty("user.dir")
-                + File.separator
-                + "uploads"
-                + File.separator
-                + "ruts";
-
+        // CREAR CARPETA SI NO EXISTE
         File directorio = new File(uploadDir);
-
         if (!directorio.exists()) {
             directorio.mkdirs();
         }
 
-        // GENERAR NOMBRE ÚNICO DEL PDF
-        String nombreArchivo = System.currentTimeMillis()
-                + "_"
-                + archivo.getOriginalFilename();
+        String rutaArchivo = null;
 
-        // RUTA COMPLETA
-        String rutaArchivo = uploadDir
-                + File.separator
-                + nombreArchivo;
+        // SUBIR PDF
+        if (archivo != null && !archivo.isEmpty()) {
 
-        // GUARDAR ARCHIVO
-        archivo.transferTo(new File(rutaArchivo));
+            String nombreArchivo = System.currentTimeMillis()
+                    + "_"
+                    + archivo.getOriginalFilename();
+
+            rutaArchivo = uploadDir + File.separator + nombreArchivo;
+
+            archivo.transferTo(new File(rutaArchivo));
+        }
 
         // CREAR CLIENTE
         Cliente cliente = Cliente.builder()
@@ -69,7 +71,28 @@ public class ClienteService {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        // GUARDAR EN BASE DE DATOS
+        // GUARDAR EN BD
         return clienteRepository.save(cliente);
+    }
+
+    // =========================
+    // LISTAR CLIENTES
+    // =========================
+    @Transactional(readOnly = true)
+    public List<Cliente> listarClientes() {
+        return clienteRepository.findAll();
+    }
+
+    // =========================
+    // BUSCAR POR CÉDULA
+    // =========================
+    @Transactional(readOnly = true)
+    public Cliente buscarPorCedula(String documentNumber) {
+        return clienteRepository.findByDocumentNumber(documentNumber)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Cliente no encontrado con cédula: " + documentNumber
+                        )
+                );
     }
 }
