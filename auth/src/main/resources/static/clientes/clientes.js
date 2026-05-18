@@ -17,11 +17,11 @@ function showAlert(msg, type = 'success') {
 // Cargar tabla
 async function cargarClientes() {
     const tbody = document.getElementById('clientesBody');
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#64748b;">Cargando...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#64748b;">Cargando...</td></tr>';
     try {
         const data = await clientesAPI.listar();
         if (data.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#64748b;">No hay clientes registrados</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#64748b;">No hay clientes registrados</td></tr>';
             return;
         }
         tbody.innerHTML = data.map(c => `
@@ -31,13 +31,14 @@ async function cargarClientes() {
                 <td>${c.firstName} ${c.lastName}</td>
                 <td>${c.email}</td>
                 <td>${c.phone}</td>
+                <td>${c.rutPdfNombre ? '<button class="btn btn-sm btn-warning" onclick="descargarPdf('+c.id+')">📄 Ver</button>' : '-'}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="verCliente(${c.id})">Ver</button>
                 </td>
             </tr>
         `).join('');
     } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#dc2626;">Error: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#dc2626;">Error: ${err.message}</td></tr>`;
     }
 }
 
@@ -82,7 +83,7 @@ document.getElementById('btnBuscarCliente').addEventListener('click', async () =
     const cedula = document.getElementById('searchCedula').value.trim();
     if (!cedula) { cargarClientes(); return; }
     const tbody = document.getElementById('clientesBody');
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#64748b;">Buscando...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#64748b;">Buscando...</td></tr>';
     try {
         const c = await clientesAPI.buscarPorCedula(cedula);
         tbody.innerHTML = `
@@ -92,13 +93,14 @@ document.getElementById('btnBuscarCliente').addEventListener('click', async () =
                 <td>${c.firstName} ${c.lastName}</td>
                 <td>${c.email}</td>
                 <td>${c.phone}</td>
+                <td>${c.rutPdfNombre ? '<button class="btn btn-sm btn-warning" onclick="descargarPdf('+c.id+')">📄 Ver</button>' : '-'}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="verCliente(${c.id})">Ver</button>
                 </td>
             </tr>
         `;
     } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#dc2626;">${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#dc2626;">${err.message}</td></tr>`;
     }
 });
 
@@ -106,7 +108,21 @@ document.getElementById('searchCedula').addEventListener('keyup', (e) => {
     if (e.key === 'Enter') document.getElementById('btnBuscarCliente').click();
 });
 
-function verCliente(id) { /* placeholder - se puede expandir */ }
+async function descargarPdf(id) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/clientes/${id}/pdf`, {
+            headers: { 'Authorization': `Bearer ${getToken()}` }
+        });
+        if (!response.ok) { const e = await response.json(); throw new Error(e.message || 'Error'); }
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+    } catch (err) {
+        showAlert('Error al descargar PDF: ' + err.message, 'danger');
+    }
+}
+
+function verCliente(id) { /* placeholder */ }
 
 function cerrarSesion() { clearTokens(); window.location.href = '/login/Login.html'; }
 cargarClientes();

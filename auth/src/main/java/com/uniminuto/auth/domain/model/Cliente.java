@@ -55,10 +55,13 @@ public class Cliente {
     private String address;
 
     // =========================
-    // PDF RUT
+    // PDF RUT (en base64)
     // =========================
-    @Column(name = "rut_pdf_path")
-    private String rutPdfPath;
+    @Column(name = "rut_pdf_base64", columnDefinition = "TEXT")
+    private String rutPdfBase64;
+
+    @Column(name = "rut_pdf_nombre", length = 255)
+    private String rutPdfNombre;
 
     // =========================
     // FECHA CREACIÓN

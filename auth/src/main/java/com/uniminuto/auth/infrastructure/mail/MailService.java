@@ -1,6 +1,6 @@
 package com.uniminuto.auth.infrastructure.mail;
 
-import com.uniminuto.auth.application.port.out.MailPort;
+import com.uniminuto.auth.domain.port.out.MailPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

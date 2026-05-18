@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CajaService {
+public class CajaService implements com.uniminuto.auth.domain.port.in.CajaServicePort {
 
     private final VentaRepository ventaRepository;
 

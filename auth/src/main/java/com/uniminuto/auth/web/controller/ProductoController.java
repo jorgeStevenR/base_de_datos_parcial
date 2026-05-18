@@ -2,7 +2,7 @@ package com.uniminuto.auth.web.controller;
 
 import com.uniminuto.auth.application.dto.request.ProductoRequest;
 import com.uniminuto.auth.application.dto.response.ProductoResponse;
-import com.uniminuto.auth.application.service.ProductoService;
+import com.uniminuto.auth.domain.port.in.ProductoServicePort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductoController {
 
-    private final ProductoService productoService;
+    private final ProductoServicePort productoService;
 
     @PostMapping
     public ResponseEntity<ProductoResponse> crearProducto(

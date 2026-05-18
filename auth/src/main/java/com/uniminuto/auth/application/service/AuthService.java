@@ -1,7 +1,7 @@
 package com.uniminuto.auth.application.service;
 
-import com.uniminuto.auth.application.port.out.JwtPort;
-import com.uniminuto.auth.application.port.out.MailPort;
+import com.uniminuto.auth.domain.port.out.JwtPort;
+import com.uniminuto.auth.domain.port.out.MailPort;
 import com.uniminuto.auth.domain.exception.BadRequestException;
 import com.uniminuto.auth.domain.exception.ConflictException;
 import com.uniminuto.auth.domain.exception.ResourceNotFoundException;
@@ -28,7 +28,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AuthService {
+public class AuthService implements com.uniminuto.auth.domain.port.in.AuthServicePort {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

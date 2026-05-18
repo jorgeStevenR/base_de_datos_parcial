@@ -1,6 +1,6 @@
 package com.uniminuto.auth.infrastructure.security;
 
-import com.uniminuto.auth.application.port.out.JwtPort;
+import com.uniminuto.auth.domain.port.out.JwtPort;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;

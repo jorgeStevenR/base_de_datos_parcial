@@ -21,5 +21,5 @@ public class ClienteResponse {
 
     private String address;
 
-    private String rutPdfPath;
+    private String rutPdfNombre;
 }

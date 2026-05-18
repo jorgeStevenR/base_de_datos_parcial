@@ -10,18 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ClienteService {
+public class ClienteService implements com.uniminuto.auth.domain.port.in.ClienteServicePort {
 
     private final ClienteRepository clienteRepository;
-
-    private final String uploadDir = "uploads/ruts";
 
     // =========================
     // CREAR CLIENTE
@@ -39,24 +37,14 @@ public class ClienteService {
             throw new ConflictException("El correo ya está registrado");
         }
 
-        // CREAR CARPETA SI NO EXISTE
-        File directorio = new File(uploadDir);
-        if (!directorio.exists()) {
-            directorio.mkdirs();
-        }
+        String pdfBase64 = null;
+        String pdfNombre = null;
 
-        String rutaArchivo = null;
-
-        // SUBIR PDF
+        // CONVERTIR PDF A BASE64
         if (archivo != null && !archivo.isEmpty()) {
-
-            String nombreArchivo = System.currentTimeMillis()
-                    + "_"
-                    + archivo.getOriginalFilename();
-
-            rutaArchivo = uploadDir + File.separator + nombreArchivo;
-
-            archivo.transferTo(new File(rutaArchivo));
+            pdfNombre = archivo.getOriginalFilename();
+            byte[] bytes = archivo.getBytes();
+            pdfBase64 = Base64.getEncoder().encodeToString(bytes);
         }
 
         // CREAR CLIENTE
@@ -67,7 +55,8 @@ public class ClienteService {
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .address(request.getAddress())
-                .rutPdfPath(rutaArchivo)
+                .rutPdfBase64(pdfBase64)
+                .rutPdfNombre(pdfNombre)
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -93,6 +82,17 @@ public class ClienteService {
                         new ResourceNotFoundException(
                                 "Cliente no encontrado con cédula: " + documentNumber
                         )
+                );
+    }
+
+    // =========================
+    // BUSCAR POR ID
+    // =========================
+    @Transactional(readOnly = true)
+    public Cliente buscarPorId(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cliente no encontrado con ID: " + id)
                 );
     }
 }

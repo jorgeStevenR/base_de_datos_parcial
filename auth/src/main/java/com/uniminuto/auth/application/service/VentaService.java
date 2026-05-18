@@ -32,7 +32,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class VentaService {
+public class VentaService implements com.uniminuto.auth.domain.port.in.VentaServicePort {
 
     private final VentaRepository ventaRepository;
     private final ProductoRepository productoRepository;

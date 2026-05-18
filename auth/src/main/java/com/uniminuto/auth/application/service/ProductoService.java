@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductoService {
+public class ProductoService implements com.uniminuto.auth.domain.port.in.ProductoServicePort {
 
     private final ProductoRepository productoRepository;
 

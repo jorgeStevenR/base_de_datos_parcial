@@ -1,7 +1,7 @@
 package com.uniminuto.auth.web.controller;
 
 import com.uniminuto.auth.application.dto.response.CajaResponse;
-import com.uniminuto.auth.application.service.CajaService;
+import com.uniminuto.auth.domain.port.in.CajaServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class CajaController {
 
-    private final CajaService cajaService;
+    private final CajaServicePort cajaService;
 
     // =========================
     // OBTENER SALDO EN CAJA

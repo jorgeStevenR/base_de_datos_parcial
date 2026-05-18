@@ -1,4 +1,4 @@
-package com.uniminuto.auth.application.port.out;
+package com.uniminuto.auth.domain.port.out;
 
 public interface MailPort {
 

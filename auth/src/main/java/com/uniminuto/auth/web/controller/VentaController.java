@@ -2,7 +2,7 @@ package com.uniminuto.auth.web.controller;
 
 import com.uniminuto.auth.application.dto.request.VentaRequest;
 import com.uniminuto.auth.application.dto.response.VentaResponse;
-import com.uniminuto.auth.application.service.VentaService;
+import com.uniminuto.auth.domain.port.in.VentaServicePort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VentaController {
 
-    private final VentaService ventaService;
+    private final VentaServicePort ventaService;
 
     // =========================
     // CREAR VENTA

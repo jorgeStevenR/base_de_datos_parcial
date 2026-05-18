@@ -1,6 +1,6 @@
 package com.uniminuto.auth.web.controller;
 
-import com.uniminuto.auth.application.service.AuthService;
+import com.uniminuto.auth.domain.port.in.AuthServicePort;
 import com.uniminuto.auth.application.dto.request.ForgotPasswordRequest;
 import com.uniminuto.auth.application.dto.request.LoginRequest;
 import com.uniminuto.auth.application.dto.request.RegisterRequest;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthService authService;
+    private final AuthServicePort authService;
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
