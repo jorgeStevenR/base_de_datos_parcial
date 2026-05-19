@@ -114,7 +114,9 @@ const authAPI = {
 const clientesAPI = {
     listar: () => apiRequest('/clientes'),
     crear: (fd) => apiRequest('/clientes', { method: 'POST', body: fd }),
-    buscarPorCedula: (c) => apiRequest(`/clientes/buscar/${encodeURIComponent(c)}`)
+    buscarPorCedula: (c) => apiRequest(`/clientes/buscar/${encodeURIComponent(c)}`),
+    generarClientePdf: (id) => apiRequest(`/clientes/${id}/pdf-cliente`),
+    eliminar: (id) => apiRequest(`/clientes/${id}`, { method: 'DELETE' })
 };
 
 // ---------- PRODUCTOS ----------

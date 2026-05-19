@@ -70,4 +70,29 @@ public class ClienteController {
                         "inline; filename=\"" + filename + "\"")
                 .body(pdfBytes);
     }
+
+    // =========================
+    // GENERAR Y DESCARGAR PDF DEL CLIENTE
+    // =========================
+    @GetMapping("/{id}/pdf-cliente")
+    public ResponseEntity<org.springframework.core.io.Resource> descargarPdfCliente(@PathVariable Long id) throws IOException {
+        java.io.File pdfFile = clienteService.generarClientePdf(id);
+
+        org.springframework.core.io.Resource resource = new org.springframework.core.io.FileSystemResource(pdfFile);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=\"" + pdfFile.getName() + "\"")
+                .body(resource);
+    }
+
+    // =========================
+    // ELIMINAR CLIENTE
+    // =========================
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
+        clienteService.eliminarCliente(id);
+        return ResponseEntity.noContent().build();
+    }
 }

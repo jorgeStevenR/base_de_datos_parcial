@@ -33,7 +33,8 @@ async function cargarClientes() {
                 <td>${c.phone}</td>
                 <td>${c.rutPdfNombre ? '<button class="btn btn-sm btn-warning" onclick="descargarPdf('+c.id+')">📄 Ver</button>' : '-'}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary" onclick="verCliente(${c.id})">Ver</button>
+                    <button class="btn btn-sm btn-primary" onclick="verClientePdf(${c.id})">Ver PDF</button>
+                    <button class="btn btn-sm btn-danger" onclick="eliminarClienteConfirm(${c.id})">Eliminar</button>
                 </td>
             </tr>
         `).join('');
@@ -95,7 +96,8 @@ document.getElementById('btnBuscarCliente').addEventListener('click', async () =
                 <td>${c.phone}</td>
                 <td>${c.rutPdfNombre ? '<button class="btn btn-sm btn-warning" onclick="descargarPdf('+c.id+')">📄 Ver</button>' : '-'}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary" onclick="verCliente(${c.id})">Ver</button>
+                    <button class="btn btn-sm btn-primary" onclick="verClientePdf(${c.id})">👁️ Ver PDF</button>
+                    <button class="btn btn-sm btn-danger" onclick="eliminarClienteConfirm(${c.id})">🗑️ Eliminar</button>
                 </td>
             </tr>
         `;
@@ -119,6 +121,35 @@ async function descargarPdf(id) {
         window.open(url, '_blank');
     } catch (err) {
         showAlert('Error al descargar PDF: ' + err.message, 'danger');
+    }
+}
+
+// Ver PDF del cliente
+async function verClientePdf(id) {
+    try {
+        const blob = await clientesAPI.generarClientePdf(id);
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+    } catch (err) {
+        showAlert('Error al generar PDF: ' + err.message, 'danger');
+    }
+}
+
+// Confirmar eliminación de cliente
+function eliminarClienteConfirm(id) {
+    if (confirm('¿Está seguro de que desea eliminar este cliente? Esta acción no se puede deshacer.')) {
+        eliminarCliente(id);
+    }
+}
+
+// Eliminar cliente
+async function eliminarCliente(id) {
+    try {
+        await clientesAPI.eliminar(id);
+        showAlert('Cliente eliminado exitosamente', 'success');
+        cargarClientes();
+    } catch (err) {
+        showAlert('Error al eliminar cliente: ' + err.message, 'danger');
     }
 }
 

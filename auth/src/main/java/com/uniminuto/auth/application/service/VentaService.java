@@ -330,6 +330,8 @@ public class VentaService implements com.uniminuto.auth.domain.port.in.VentaServ
                 contentStream.showText("TOTAL: $" + String.format("%.2f", venta.getTotal()));
                 contentStream.endText();
             }
+
+            document.save(rutaCompleta);
         }
 
         log.info("Factura PDF generada: {}", rutaCompleta);

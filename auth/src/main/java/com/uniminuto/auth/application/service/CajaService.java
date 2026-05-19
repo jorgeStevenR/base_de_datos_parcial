@@ -184,6 +184,8 @@ public class CajaService implements com.uniminuto.auth.domain.port.in.CajaServic
                 contentStream.showText("Total de ventas realizadas: " + ventas.size());
                 contentStream.endText();
             }
+
+            document.save(rutaCompleta);
         }
 
         log.info("Histórico PDF generado: {}", rutaCompleta);
