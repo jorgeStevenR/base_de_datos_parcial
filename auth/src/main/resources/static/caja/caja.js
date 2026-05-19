@@ -7,6 +7,13 @@ const user = getUser();
 document.getElementById('userInfo').textContent =
     user ? `${user.firstName || ''} ${user.lastName || ''} (${user.email})` : 'Usuario';
 
+const alertBox = document.getElementById('alertBox');
+function showAlert(msg, type = 'success') {
+    alertBox.textContent = msg;
+    alertBox.className = `alert alert-${type} show`;
+    setTimeout(() => { alertBox.className = 'alert'; }, 4000);
+}
+
 async function cargarCaja() {
     try {
         const data = await cajaAPI.obtenerSaldo();
